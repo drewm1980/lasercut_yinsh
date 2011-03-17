@@ -102,17 +102,18 @@ if(true){
 }
 
 // Define the vertical lines
-path[] uplines = a2--a5
-			^^b1--b7
-			^^c1--c8
-			^^d1--d9
-			^^e1--e10
-			^^f2--f10
-			^^g2--g11
-			^^h3--h11
-			^^i4--i11
-			^^j5--j11
-			^^k7--k10;
+pair ext = 0.15*up;  // extension vector
+path[] uplines = a2-ext -- a5+ext
+				^^b1-ext -- b7+ext
+				^^c1-ext -- c8+ext
+				^^d1-ext -- d9+ext
+				^^e1-ext -- e10+ext
+				^^f2-ext -- f10+ext
+				^^g2-ext -- g11+ext
+				^^h3-ext -- h11+ext
+				^^i4-ext -- i11+ext
+				^^j5-ext -- j11+ext
+				^^k7-ext -- k10+ext;
 
 // Define the other lines by rotation about the board center.
 pair boardcenter = f2 + 4*up;
