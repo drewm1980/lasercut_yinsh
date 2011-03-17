@@ -3,6 +3,9 @@ real paperwidth=24inches;
 real paperheight=24inches;
 size(paperwidth,paperheight,IgnoreAspect);
 
+// You might need to adjust this for your laser cutter
+pen cutpen = black+linewidth(.001inches);
+
 // This code is based on an up, downright coordinate system centered at a1.
 // (a1 is actually just off the lower-left corner of the board; not a legal position)
 pair dr = rotate(60)*down;
@@ -42,9 +45,9 @@ pair j10 = 9*dr + 9*up;
  
 // Top-right edge
 pair j11 = 9*dr + 10*up;
-pair h11 = 7*dr + 10*up;
 pair i11 = 8*dr + 10*up;
-pair g10 = 6*dr + 10*up;
+pair h11 = 7*dr + 10*up;
+pair g11 = 6*dr + 10*up;
 
 // Funny inner corner
 pair f10 = 5*dr + 9*up;
@@ -65,34 +68,58 @@ pair a3 = 0*dr + 2*up;
 pair a2 = 0*dr + 1*up;
 
 // Print the outer edge as dots as a sanity check
-pen cutpen = black+linewidth(.001inches);
-dot(b2);
-dot(b1);
-dot(c1);
-dot(d1);
-dot(e1);
-dot(f2);
-dot(g2);
-dot(h3);
-dot(i4);
-dot(j5);
-dot(j6);
-dot(k7);
-dot(k8);
-dot(k9);
-dot(k10);
-dot(j10);
-dot(j11);
-dot(i11);
-dot(h11);
-dot(g10);
-dot(f10);
-dot(e10);
-dot(d9);
-dot(c8);
-dot(b7);
-dot(b6);
-dot(a5);
-dot(a4);
-dot(a3);
-dot(a2);
+if(true){
+	dot(b2);
+	dot(b1);
+	dot(c1);
+	dot(d1);
+	dot(e1);
+	dot(f2);
+	dot(g2);
+	dot(h3);
+	dot(i4);
+	dot(j5);
+	dot(j6);
+	dot(k7);
+	dot(k8);
+	dot(k9);
+	dot(k10);
+	dot(j10);
+	dot(j11);
+	dot(i11);
+	dot(h11);
+	dot(g11);
+	dot(f10);
+	dot(e10);
+	dot(d9);
+	dot(c8);
+	dot(b7);
+	dot(b6);
+	dot(a5);
+	dot(a4);
+	dot(a3);
+	dot(a2);
+}
+
+// Define the vertical lines
+path[] uplines = a2--a5
+			^^b1--b7
+			^^c1--c8
+			^^d1--d9
+			^^e1--e10
+			^^f2--f10
+			^^g2--g11
+			^^h3--h11
+			^^i4--i11
+			^^j5--j11
+			^^k7--k10;
+
+// Define the other lines by rotation about the board center.
+pair boardcenter = f2 + 4*up;
+path[] uprightlines = rotate(-60, boardcenter)*uplines;
+path[] upleftlines = rotate(60, boardcenter)*uplines;
+
+draw(uplines);
+draw(uprightlines);
+draw(upleftlines);
+
