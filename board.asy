@@ -1,7 +1,8 @@
-unitsize(1inch);
-real paperwidth=24inches;
-real paperheight=24inches;
-size(paperwidth,paperheight,IgnoreAspect);
+unitsize(1mm);
+
+real trianglesidelength = 138.0/3;
+real extensionlength = 5.76;
+real extensionfraction = extensionlength/trianglesidelength;
 
 // You might need to adjust this for your laser cutter
 pen cutpen = black+linewidth(.001inches);
@@ -67,42 +68,8 @@ pair a4 = 0*dr + 3*up;
 pair a3 = 0*dr + 2*up;
 pair a2 = 0*dr + 1*up;
 
-// Print the outer edge as dots as a sanity check
-if(true){
-	dot(b2);
-	dot(b1);
-	dot(c1);
-	dot(d1);
-	dot(e1);
-	dot(f2);
-	dot(g2);
-	dot(h3);
-	dot(i4);
-	dot(j5);
-	dot(j6);
-	dot(k7);
-	dot(k8);
-	dot(k9);
-	dot(k10);
-	dot(j10);
-	dot(j11);
-	dot(i11);
-	dot(h11);
-	dot(g11);
-	dot(f10);
-	dot(e10);
-	dot(d9);
-	dot(c8);
-	dot(b7);
-	dot(b6);
-	dot(a5);
-	dot(a4);
-	dot(a3);
-	dot(a2);
-}
-
 // Define the vertical lines
-pair ext = 0.15*up;  // extension vector
+pair ext = extensionfraction*up;  // extension vector
 path[] uplines = a2-ext -- a5+ext
 				^^b1-ext -- b7+ext
 				^^c1-ext -- c8+ext
@@ -120,7 +87,8 @@ pair boardcenter = f2 + 4*up;
 path[] uprightlines = rotate(-60, boardcenter)*uplines;
 path[] upleftlines = rotate(60, boardcenter)*uplines;
 
-draw(uplines);
-draw(uprightlines);
-draw(upleftlines);
+// Draw the lines
+draw(scale(trianglesidelength)*uplines);
+draw(scale(trianglesidelength)*uprightlines);
+draw(scale(trianglesidelength)*upleftlines);
 
