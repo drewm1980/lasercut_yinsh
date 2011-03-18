@@ -120,7 +120,7 @@ path[] uprightlines = rotate(-60, boardcenter)*uplines;
 path[] upleftlines = rotate(60, boardcenter)*uplines;
 
 // Define a hexagonal boundary for the board
-pair hoc = a2-2*(dr+up); // Hexagon outer corner
+pair hoc = a1-(dr+up); // Hexagon outer corner
 path[] hexagon = hoc
 				--rotate(60,boardcenter)*hoc
 				--rotate(2*60,boardcenter)*hoc
