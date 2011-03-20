@@ -1,6 +1,7 @@
 unitsize(1mm);
 
 real trianglesidelength = 138.0/3;
+transform s = scale(trianglesidelength);
 real extensionlength = 5.76;
 real extensionfraction = extensionlength/trianglesidelength;
 
@@ -87,8 +88,53 @@ pair boardcenter = f2 + 4*up;
 path[] uprightlines = rotate(-60, boardcenter)*uplines;
 path[] upleftlines = rotate(60, boardcenter)*uplines;
 
+// Define a hexagonal boundary for the board
+pair hoc = a1-(dr+up); // Hexagon outer corner
+path[] hexagon = hoc
+				--rotate(60,boardcenter)*hoc
+				--rotate(2*60,boardcenter)*hoc
+				--rotate(3*60,boardcenter)*hoc
+				--rotate(4*60,boardcenter)*hoc
+				--rotate(5*60,boardcenter)*hoc
+			--cycle;	
+
+// Draw the outer edge as dots 
+if(true){
+	dot(s*b2);
+	dot(s*b1);
+	dot(s*c1);
+	dot(s*d1);
+	dot(s*e1);
+	dot(s*f2);
+	dot(s*g2);
+	dot(s*h3);
+	dot(s*i4);
+	dot(s*j5);
+	dot(s*j6);
+	dot(s*k7);
+	dot(s*k8);
+	dot(s*k9);
+	dot(s*k10);
+	dot(s*j10);
+	dot(s*j11);
+	dot(s*i11);
+	dot(s*h11);
+	dot(s*g11);
+	dot(s*f10);
+	dot(s*e10);
+	dot(s*d9);
+	dot(s*c8);
+	dot(s*b7);
+	dot(s*b6);
+	dot(s*a5);
+	dot(s*a4);
+	dot(s*a3);
+	dot(s*a2);
+}
+
 // Draw the lines
-draw(scale(trianglesidelength)*uplines);
-draw(scale(trianglesidelength)*uprightlines);
-draw(scale(trianglesidelength)*upleftlines);
+draw(s*hexagon);
+draw(s*uplines);
+draw(s*uprightlines);
+draw(s*upleftlines);
 
